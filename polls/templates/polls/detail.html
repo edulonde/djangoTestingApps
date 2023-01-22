@@ -1,27 +1,36 @@
-
 <!DOCTYPE html>
-
+{% load tailwind_tags %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Detail - PollsApp</title>
-
+    {% tailwind_css %}
 </head>
-<body>
+<body class="container mx-auto">
 
 <form action="{% url 'polls:vote' question.id %}" method="post">
     {% csrf_token %}
     <fieldset>
-        <legend><h1>{{ question.question_text }}</h1></legend>
-        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-        {% for choice in question.choice_set.all %}
-        <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
-        <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
-        {% endfor %}
+        <legend>
+            <h1 class="font-bold text-4xl p-4 text-center">{{ question.question_text }}</h1>
+        </legend>
+        {% if error_message %}
+        <p>
+            <strong>{{ error_message }}</strong>
+        </p>{% endif %}
+        <div class="mx-4">
+            {% for choice in question.choice_set.all %}
+            <input class="p-2" type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+            <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+            {% endfor %}
+        </div>
     </fieldset>
-    <input type="submit" value="Vote">
+    <div class="flex space-x-2 justify-start p-2">
+        <button class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out" type="submit" value="Vote">Votar</button>
+    </div>
 </form>
 
+<p class=""><a href="{% url 'polls:index'  %}">Retornar às enquetes</a></p>
 
 </body>
 </html>

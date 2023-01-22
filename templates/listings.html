@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load tailwind_tags %}
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Listings</title>
+    {% tailwind_css %}
+</head>
+<body>
+{% block content %}
+
+{% for listing in listings %}
+
+<ul>
+    <a href="/listings/{{ listing.id }}/">
+        <li>{{ listing.title }}</li>
+    </a>
+</ul>
+
+
+{% endfor %}
+
+{% endblock %}
+
+</body>
+</html>

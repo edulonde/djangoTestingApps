@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html lang="en">
+{% extends "base.html" %}
+{% load tailwind_tags %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>Create Listing</title>
+    {% tailwind_css %}
+</head>
+<body>
+
+<h1 class="text-4xl text-gray-900">Update Listing</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
+
+
+</form>
+
+</body>
+</html>
